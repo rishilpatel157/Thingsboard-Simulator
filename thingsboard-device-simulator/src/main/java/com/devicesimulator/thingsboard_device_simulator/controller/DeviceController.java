@@ -85,16 +85,15 @@ public class DeviceController {
         }
     }
 
-    @PostMapping("/stop")
-    public ResponseEntity<String> stopDeviceSimulation() {
-        log.info("Request received to stop device simulation.");
+    @PostMapping("/stopAll")
+    public ResponseEntity<String> stopAllDevices() {
+        log.info("Request received to stop all device simulations");
         try {
-            deviceGeneratorService.stopSendingData();
-            log.info("Device simulation stopped successfully.");
-            return ResponseEntity.ok("Device simulation stopped.");
+            deviceGeneratorService.stopAllDevices();
+            return ResponseEntity.ok("All device simulations stopped successfully.");
         } catch (Exception e) {
-            log.error("Failed to stop device simulation", e);
-            throw new ApiException("Failed to stop simulation", "SIM_STOP_ERROR",HttpStatus.INTERNAL_SERVER_ERROR);
+            log.error("Failed to stop all device simulations", e);
+            throw new ApiException("Failed to stop all devices", "DEVICE_STOP_ALL_ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

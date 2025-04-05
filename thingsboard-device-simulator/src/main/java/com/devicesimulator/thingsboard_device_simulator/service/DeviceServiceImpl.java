@@ -138,11 +138,31 @@ public class DeviceServiceImpl implements DeviceService{
 
         HttpEntity<Void> request = new HttpEntity<>(headers);
 
-        ResponseEntity<JsonNode> response = restTemplate.exchange(
-                url, HttpMethod.GET, request, JsonNode.class);
+        try {
+            ResponseEntity<JsonNode> response = restTemplate.exchange(
+                    url, HttpMethod.GET, request, JsonNode.class);
 
-        System.out.println(response.getBody());
-        return response.getBody();
+            JsonNode responseBody = response.getBody();
+
+            if (responseBody != null && responseBody.has("data") && responseBody.get("data").isArray()) {
+                if (responseBody.get("data").size() == 0) {
+                    System.out.println("No active alarms found for device: " + deviceId);
+                    ObjectMapper mapper = new ObjectMapper();
+                    return mapper.createObjectNode().put("message", "No active alarms found for device: " + deviceId);
+                } else {
+                    return responseBody;
+                }
+            } else {
+                System.out.println("Unexpected response structure or null body for device: " + deviceId);
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.createObjectNode().put("message", "No active alarms found or invalid response.");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error retrieving alarms for device " + deviceId + ": " + e.getMessage());
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.createObjectNode().put("error", "Failed to fetch alarms: " + e.getMessage());
+        }
     }
 
 }

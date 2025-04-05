@@ -82,9 +82,11 @@ public class DeviceGeneratorService {
         log.info("Stopped simulation for device: {}", deviceType);
     }
 
-    public void stopSendingData() {
-        isRunning = false; // Stop the loop
-
+    public void stopAllDevices() {
+        for (String deviceType : deviceRunningMap.keySet()) {
+            deviceRunningMap.put(deviceType, false);
+            System.out.println("Stopping deviceType: " + deviceType);
+        }
     }
 
 }
