@@ -53,7 +53,7 @@ Each device sends randomized telemetry to ThingsBoard at regular intervals.
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/devices/publish/{deviceType}` | `POST` | Start publishing telemetry for a given device |
-| `/api/devices/stop/{deviceType}` | `POST` | Stop telemetry publishing |
+| `/api/devices/stop` | `POST` | Stop telemetry publishing |
 | `/api/devices/devices` | `GET` | List all supported device types |
 | `/api/devices/devicehealth/{deviceId}` | `GET` | Fetch device online/offline status |
 | `/api/devices/alarms/{deviceId}` | `GET` | Retrieve alarm state for a device |
@@ -67,7 +67,7 @@ Each device sends randomized telemetry to ThingsBoard at regular intervals.
 - **MQTT (Eclipse Paho Client)**
 - **ThingsBoard CE**
 - **Lombok**
-- **Maven**
+- **Gradle**
 
 ---
 
