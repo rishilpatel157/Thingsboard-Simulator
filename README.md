@@ -32,9 +32,8 @@ A production-ready **Spring Boot** application to simulate IoT devices and publi
 ## 📡 Supported Devices
 
 - ✅ Temperature Sensor
-- ✅ Power Meter
-- ✅ Voltage Monitor
-- ✅ Current Monitor
+- ✅ Power Consumption Meter
+
 
 Each device sends randomized telemetry to ThingsBoard at regular intervals.
 
